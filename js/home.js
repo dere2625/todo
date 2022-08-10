@@ -2,9 +2,7 @@ jQuery(function(){
 
     const myModal = document.getElementById('mymodal')
     $('.add').click(function(){
-        // alert('hello')
         $('#myModal').modal('show')
-        $(".modal-backdrop.in").hide();
 
     })
 
@@ -59,7 +57,7 @@ jQuery(function(){
         $('.comp').css('display','none')
         $('.arch').css('display','none')
         $('.account').css('display','flex')
-        
+        setSelected('account')
     })
 
     function setSelected(item){

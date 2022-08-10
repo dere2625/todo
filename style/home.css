@@ -28,7 +28,7 @@ body{
     gap: 1em;
 }
 
-.pend,.arch, .comp, .account{
+.arch, .comp, .account{
     display: none;
 }
 
@@ -60,7 +60,7 @@ body{
 }
 
 .dash{
-    display: flex;
+    display: none;
     flex-direction: column;
     width: 100%;
 }
@@ -89,6 +89,69 @@ body{
     color: red;
 }
 
+.pend{
+    display: flex;
+    flex-direction: column;
+}
+
+#status{
+    opacity: 1;
+    height: 2em;
+    width: 2em;
+}
+
+.task{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2em;
+    padding: 1.5em;
+    width: 100%;
+    gap: 3em;
+    justify-content: space-between;
+    /* border: 1px rgb(227, 227, 227) solid; */
+    /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+._left{
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+}
+
+.cont{
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+}
+
+.tags{
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+}
+
+.tags #cat{
+    background-color: rgb(171, 255, 255);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: small;
+    height: fit-content;
+    border-radius: 20px;
+}
+
+.tags #date{
+    background-color: rgb(255, 239, 217);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: small;
+    height: fit-content;
+    border-radius: 20px;
+}
 
 
 

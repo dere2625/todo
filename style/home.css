@@ -1,0 +1,87 @@
+body{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0px;
+}
+
+
+.leftpanel{
+    width: 100px;
+    background-color: aliceblue;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    height: fit-content;
+}
+
+.rightpanel{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    gap: 1em;
+}
+
+
+.icon{
+    font-size: 2em;
+}
+
+.selected{
+    color: red;
+}
+
+.mod{
+    background-color: transparent;
+}
+
+
+.control{
+    display: flex;
+    gap: 20px;
+}
+
+.add{
+    /* align-self: flex-end; */
+    position: fixed;
+    margin: 2em;
+    align-self: flex-end;
+    float: right;
+
+}
+
+.boards{
+    height: 70%;
+    gap: 2em;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.board{
+    width: 100%;
+    height: 200px;
+    border: 1px rgb(225, 225, 225) solid;
+    border-radius: 20px;
+}
+
+.board span{
+    padding-left: 1.5em;
+    padding-top: 2em;
+    display: inline-flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    justify-content: center;
+    color: red;
+}
+
+
+
+
+
+

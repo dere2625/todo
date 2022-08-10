@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/home.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../js/home.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Home - Todo</title>
+</head>
+<body>
+    <div class="leftpanel">
+        <div class="icon selected" title="Dashboard">
+            <i class="bi bi-speedometer2"></i>
+        </div>
+        <div class="icon" title="Pending">
+            <i class="bi bi-stopwatch"></i>
+        </div>
+        <div class="icon" title="Completed"> 
+            <i class="bi bi-check-circle"></i>
+        </div>
+        <div class="icon" title="Archived">
+            <i class="bi bi-archive"></i>
+        </div>
+    </div>
+    <div class="rightpanel">
+        <h6 class="display-6">Dashboard </h6>
+        <div class="boards">
+            <div class="board">
+                <h1 class="display-6"><span>21</span> Pending tasks </h1>
+            </div>
+            <div class="board">
+                <h1 class="display-6"><span>1</span> Completed Task </h1>
+            </div>
+            <div class="board">
+                <h1 class="display-6"><span>2</span> Archived Tasks </h1>
+            </div>
+            <div class="board">
+                <h1 class="display-6"><span>3</span> Tasks due soon </h1>
+            </div>
+        </div>
+        <a id="add" class="btn-floating btn-large waves-effect waves-light red add"><i class="material-icons">add</i></a>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalCenteredScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle">Create a task</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="email" class="form-control" id="title" placeholder="Title">
+                  </div>
+                  <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea  class="form-control" id="description" rows="10" placeholder="Description"></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label for="category" class="form-label">Email address</label>
+                    <select id="category" class="form-select" aria-label="Default select example">
+                        <option selected>Select category</option>
+                        <option value="1">Sports</option>
+                        <option value="2">Personal</option>
+                        <option value="3">Work</option>
+                        <option value="4">Fun</option>
+                      </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="start">Due date:</label>
+                    <input type="date" id="start" name="trip-start">
+                  </div>
+                  <div class="mb-3">
+                    <label for="status" class="form-label">Status</label>
+                    <select disabled id="status" class="form-select" aria-label="Default select example">
+                        <option selected>Pending</option>
+                      </select>
+                  </div>
+
+            </div>
+            <div class="modal-footer control">
+                <button type="button" class="btn btn-success" id="login">Save</button>
+                <button type="button" class="btn btn-light" id="forgotpassword">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+</html>

@@ -9,7 +9,7 @@ body{
 
 ._container{
     width: 40%;
-    height: 70vh;
+    height: 80vh;
     border: 1px grey solid;
     border-radius: 15px;
     display: flex;
@@ -30,10 +30,14 @@ body{
 .controls{
     width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
 }
 
+
+
 .controls button{
-    width: 45%;
+    width: 100%;
 }

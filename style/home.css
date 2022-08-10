@@ -28,6 +28,9 @@ body{
     gap: 1em;
 }
 
+.pend,.arch, .comp, .account{
+    display: none;
+}
 
 .icon{
     font-size: 2em;
@@ -54,6 +57,12 @@ body{
     align-self: flex-end;
     float: right;
 
+}
+
+.dash{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .boards{

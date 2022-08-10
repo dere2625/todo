@@ -8,25 +8,79 @@ jQuery(function(){
 
     })
 
-    $('.icon').click(function (){
-        $(this).toggleClass('selected')
+    $('#pending').click(function (){
+        $(this).addClass('selected')
+        $('.dash').css('display','none')
+        $('.comp').css('display','none')
+        $('.arch').css('display','none')
+        $('.pend').css('display','flex')
+        $('.account').css('display','none')
+        setSelected('pend')
     })
-    const date = new Date();
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
-    let todaysdate = `${year}-${month}-${day}`
-
     
-    $('.input-group.date').datepicker({
-        endDate:todaysdate,
-        format: "yyyy/mm/dd",
-        maxViewMode: 3,
-        todayBtn: "linked",
-        orientation: "bottom auto",
-        autoclose:true,
-        calendarWeeks: true
-    });
 
+    $('#dashboard').click(function (){
+        setSelected('dash')
+        $(this).addClass('selected')
+        $('.dash').css('display','flex')
+        $('.dash').css('flex-direction','column')
+        $('.pend').css('display','none')
+        $('.comp').css('display','none')
+        $('.arch').css('display','none')
+        $('.account').css('display','none')
+        
+    })
+
+    $('#completed').click(function (){
+        $(this).addClass('selected')
+        $('.dash').css('display','none')
+        $('.pend').css('display','none')
+        $('.comp').css('display','flex')
+        $('.arch').css('display','none')
+        $('.account').css('display','none')
+        setSelected('comp')
+    })
     
+
+    $('#archived').click(function (){
+        $(this).addClass('selected')
+        $('.dash').css('display','none')
+        $('.pend').css('display','none')
+        $('.comp').css('display','none')
+        $('.arch').css('display','flex')
+        $('.account').css('display','none')
+        setSelected('arch')
+    })
+
+    $('#account').click(function (){
+        $(this).addClass('selected')
+        $('.dash').css('display','none')
+        $('.pend').css('display','none')
+        $('.comp').css('display','none')
+        $('.arch').css('display','none')
+        $('.account').css('display','flex')
+        
+    })
+
+    function setSelected(item){
+        switch (item) {
+            case 'dash':
+                $('#pending, #completed, #archived, #account').removeClass('selected')
+                break;
+            case 'pend':
+                $('#dashboard, #completed, #archived, #account').removeClass('selected')
+                break;
+            case 'comp':
+                $('#pending, #dashboard, #archived, #account').removeClass('selected')
+                break;
+            case 'arch':
+                $('#pending, #completed, #dashboard, #account').removeClass('selected')
+                break;
+            case 'account':
+                $('#pending, #completed, #archived, #dashboard').removeClass('selected')
+                break;
+            default:
+                break;
+        }
+    }
 })

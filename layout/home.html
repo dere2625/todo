@@ -18,36 +18,56 @@
 </head>
 <body>
     <div class="leftpanel">
-        <div class="icon selected" title="Dashboard">
+        <div class="icon selected" id="dashboard" title="Dashboard">
             <i class="bi bi-speedometer2"></i>
         </div>
-        <div class="icon" title="Pending">
+        <div class="icon" id="pending" title="Pending">
             <i class="bi bi-stopwatch"></i>
         </div>
-        <div class="icon" title="Completed"> 
+        <div class="icon" id="completed" title="Completed"> 
             <i class="bi bi-check-circle"></i>
         </div>
-        <div class="icon" title="Archived">
+        <div class="icon" id="archived" title="Archived">
             <i class="bi bi-archive"></i>
+        </div>
+
+        <div class="icon" id="account" title="My Account">
+            <i class="bi bi-person"></i>
         </div>
     </div>
     <div class="rightpanel">
-        <h6 class="display-6">Dashboard </h6>
-        <div class="boards">
-            <div class="board">
-                <h1 class="display-6"><span>21</span> Pending tasks </h1>
+        <div class="dash">
+            <h6 class="display-6">Dashboard </h6>
+            <div class="boards">
+                <div class="board">
+                    <h1 class="display-6"><span>21</span> Pending tasks </h1>
+                </div>
+                <div class="board">
+                    <h1 class="display-6"><span>1</span> Completed Task </h1>
+                </div>
+                <div class="board">
+                    <h1 class="display-6"><span>2</span> Archived Tasks </h1>
+                </div>
+                <div class="board">
+                    <h1 class="display-6"><span>3</span> Tasks due soon </h1>
+                </div>
             </div>
-            <div class="board">
-                <h1 class="display-6"><span>1</span> Completed Task </h1>
-            </div>
-            <div class="board">
-                <h1 class="display-6"><span>2</span> Archived Tasks </h1>
-            </div>
-            <div class="board">
-                <h1 class="display-6"><span>3</span> Tasks due soon </h1>
-            </div>
+            <a id="add" class="btn-floating btn-large waves-effect waves-light red add"><i class="material-icons">add</i></a>
         </div>
-        <a id="add" class="btn-floating btn-large waves-effect waves-light red add"><i class="material-icons">add</i></a>
+        <div class="pend">
+            <h6 class="display-6">Pending Tasks </h6>
+        </div>
+        <div class="comp">
+            <h6 class="display-6">Completed Tasks </h6>
+        </div>
+        <div class="arch">
+            <h6 class="display-6">Archived Tasks </h6>
+        </div>
+        <div class="account">
+            <h6 class="display-6">My Account </h6>
+        </div>
+
+        
     </div>
 
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalCenteredScrollableTitle" aria-hidden="true">

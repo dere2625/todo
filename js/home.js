@@ -1,8 +1,6 @@
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
 jQuery(function(){
-
+    getDashInfo()
     const myModal = document.getElementById('mymodal')
     $('.add').click(function(){
         $('#myModal').modal('show')
@@ -17,6 +15,7 @@ jQuery(function(){
         $('.pend').css('display','flex')
         $('.account').css('display','none')
         setSelected('pend')
+        getPendingTasks()
     })
     
 
@@ -29,6 +28,7 @@ jQuery(function(){
         $('.comp').css('display','none')
         $('.arch').css('display','none')
         $('.account').css('display','none')
+        getDashInfo()
         
     })
 
@@ -40,6 +40,7 @@ jQuery(function(){
         $('.arch').css('display','none')
         $('.account').css('display','none')
         setSelected('comp')
+        
     })
     
 
@@ -83,5 +84,77 @@ jQuery(function(){
             default:
                 break;
         }
+    }
+
+    function getDashInfo(){
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+
+        fetch('http://127.0.0.1:8082/todo/summary', {
+            method: 'get',
+            mode: 'cors',
+            credentials: 'include',
+            headers: headers,
+        }).then(response => {
+            return response.json()
+        }).then(data => {
+            $('#noPending').text(data.pending)
+            $('#noComp').text(data.completed)
+            $('#noDue').text(data.dueSoon)
+            $('#noArch').text(data.archived)
+        })
+    }
+
+    function getPendingTasks(){
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+
+        fetch('http://127.0.0.1:8082/todo', {
+            method: 'get',
+            mode: 'cors',
+            credentials: 'include',
+            headers: headers,
+        }).then(response => {
+            return response.json()
+        }).then(data => {
+            let pendingTasks = data.filter(x => x.status === 'Pending')
+            $('.pend').children('div').remove()
+            for(task of pendingTasks){
+                $('.pend').append(
+                    `<div class="task">
+                    <div class="_left">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="status" checked>
+                        </div>
+                        <div class="data">
+                            <p class="lead">
+                                ${task.title}
+                            </p>
+                            <figcaption class="blockquote-footer">
+                                ${task.description}
+                            </figcaption>
+                        </div>
+                    </div>
+                    <div class="cont">
+                        <div class="tags">
+                            <p id="cat"class="lead">
+                                ${task.category}
+                            </p>
+                            <p id="date" class="lead">
+                                ${task.dueDate}
+                            </p>
+                        </div>
+                        <div class="edit">
+                            <i class="bi bi-pencil"></i>
+                        </div>
+                    </div>
+                </div>`
+                )
+            }
+        }).catch(err => {
+            console.log(err);
+        })
     }
 })

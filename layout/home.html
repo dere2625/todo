@@ -42,16 +42,16 @@
             <h6 class="display-6">Dashboard </h6>
             <div class="boards">
                 <div class="board">
-                    <h1 class="display-6"><span>21</span> Pending tasks </h1>
+                    <h1 class="display-6"><span id="noPending"></span> Pending task(s) </h1>
                 </div>
                 <div class="board">
-                    <h1 class="display-6"><span>1</span> Completed Task </h1>
+                    <h1 class="display-6"><span id="noComp"></span> Completed Task(s) </h1>
                 </div>
                 <div class="board">
-                    <h1 class="display-6"><span>2</span> Archived Tasks </h1>
+                    <h1 class="display-6"><span id="noArch"></span> Archived Task(s) </h1>
                 </div>
                 <div class="board">
-                    <h1 class="display-6"><span>3</span> Tasks due soon </h1>
+                    <h1 class="display-6"><span id="noDue">3</span> Task(s) due soon </h1>
                 </div>
             </div>
             <a id="add" class="btn-floating btn-large waves-effect waves-light red add"><i class="material-icons">add</i></a>
@@ -59,34 +59,7 @@
         <div class="pend">
             <h6 class="display-6">Pending Tasks </h6>
                 
-            <div class="task">
-                <div class="_left">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="status" checked>
-                    </div>
-                    <div class="data">
-                        <p class="lead">
-                            This is a title
-                        </p>
-                        <figcaption class="blockquote-footer">
-                            This is going to be a very long description of the task <cite title="Source Title">Source Title</cite>
-                        </figcaption>
-                    </div>
-                </div>
-                <div class="cont">
-                    <div class="tags">
-                        <p id="cat"class="lead">
-                            Sports
-                        </p>
-                        <p id="date" class="lead">
-                            2022-08-07
-                        </p>
-                    </div>
-                    <div class="edit">
-                        <i class="bi bi-pencil"></i>
-                    </div>
-                </div>
-            </div>
+            
         </div>
         <div class="comp">
             <h6 class="display-6">Completed Tasks </h6>
@@ -118,8 +91,8 @@
                     <textarea  class="form-control" id="description" rows="10" placeholder="Description"></textarea>
                   </div>
                   <div class="mb-3">
-                    <label for="category" class="form-label">Email address</label>
-                    <select id="category" class="form-select" aria-label="Default select example">
+                    <label for="category" class="form-label">Category</label>
+                    <select id="category" class="form-select" aria-label="Category">
                         <option selected>Select category</option>
                         <option value="1">Sports</option>
                         <option value="2">Personal</option>
@@ -132,9 +105,11 @@
                     <input type="date" id="start" name="trip-start">
                   </div>
                   <div class="mb-3">
-                    <label for="status" class="form-label">Status</label>
-                    <select disabled id="status" class="form-select" aria-label="Default select example">
-                        <option selected>Pending</option>
+                    <label for="stat" class="form-label">Status</label>
+                    <select disabled id="stat" class="form-select" aria-label="Status">
+                        <option selected value="1">Pending</option>
+                        <option value="2">Completed</option>
+                        <option value="3">Archived</option>
                       </select>
                   </div>
 

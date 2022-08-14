@@ -17,6 +17,7 @@ body{
     padding-top: 2em;
     padding-bottom: 2em;
     height: fit-content;
+    position: relative;
 }
 
 .rightpanel{
@@ -28,7 +29,24 @@ body{
     gap: 1em;
 }
 
-.arch, .comp, .account{
+.cont{
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+}
+
+.tags{
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+}
+
+.pend{
+    display: none;
+    flex-direction: column;
+}
+
+.arch, .pend, .comp, .account{
     display: none;
 }
 
@@ -51,7 +69,6 @@ body{
 }
 
 .add{
-    /* align-self: flex-end; */
     position: fixed;
     margin: 2em;
     align-self: flex-end;
@@ -60,7 +77,6 @@ body{
 }
 
 .dash{
-    display: none;
     flex-direction: column;
     width: 100%;
 }
@@ -75,8 +91,7 @@ body{
 .board{
     width: 100%;
     height: 200px;
-    border: 1px rgb(225, 225, 225) solid;
-    border-radius: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .board span{
@@ -89,10 +104,7 @@ body{
     color: red;
 }
 
-.pend{
-    display: flex;
-    flex-direction: column;
-}
+
 
 #status{
     opacity: 1;
@@ -108,8 +120,6 @@ body{
     width: 100%;
     gap: 3em;
     justify-content: space-between;
-    /* border: 1px rgb(227, 227, 227) solid; */
-    /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
@@ -119,17 +129,7 @@ body{
     gap: 2em;
 }
 
-.cont{
-    display: flex;
-    flex-direction: row;
-    gap: 2em;
-}
 
-.tags{
-    display: flex;
-    flex-direction: row;
-    gap: 2em;
-}
 
 .tags #cat{
     background-color: rgb(171, 255, 255);

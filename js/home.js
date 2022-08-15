@@ -68,6 +68,11 @@ jQuery(function(){
         createTodo()
     })
 
+    $('#logout').click(function(){
+        logout()
+        window.location.href = '../index.html'
+    })
+
     function setSelected(item){
         switch (item) {
             case 'dash':
@@ -232,6 +237,15 @@ jQuery(function(){
             }
         }).catch(err => {
             console.log(err);
+        })
+    }
+
+    function logout(){
+        
+        fetch('http://127.0.0.1:8082/user/logout', {
+            method: 'get',
+            mode: 'cors',
+            credentials: 'include',
         })
     }
 

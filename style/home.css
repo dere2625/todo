@@ -48,7 +48,7 @@ body{
 }
 
 .comp .lead, .comp .blockquote-footer{
-    text-decoration: line-through rgb(200, 200, 200);
+    text-decoration: line-through rgb(255, 39, 39);
     
 }
 .pend::-webkit-scrollbar{

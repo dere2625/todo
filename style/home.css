@@ -40,18 +40,24 @@ body{
     gap: 2em;
 }
 
-.pend,.comp{
+.pend,.comp, .arch{
     display: none;
     flex-direction: column;
     overflow-y: scroll;
-    
+    padding-bottom: 1em;
 }
 
 .comp .lead, .comp .blockquote-footer{
     text-decoration: line-through rgb(255, 39, 39);
     
 }
-.pend::-webkit-scrollbar{
+
+.arch .lead, .comp .blockquote-footer{
+    text-decoration: line-through rgb(255, 39, 39);
+    
+}
+
+.pend::-webkit-scrollbar, .comp::-webkit-scrollbar, .arch::-webkit-scrollbar{
     display: none;
 }
 
@@ -65,6 +71,12 @@ body{
 
 .selected{
     color: red;
+}
+
+.ops{
+    display: flex;
+    flex-direction: row;
+    gap: 1.5em;
 }
 
 .mod{

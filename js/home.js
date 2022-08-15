@@ -52,6 +52,7 @@ jQuery(function(){
         $('.arch').css('display','flex')
         $('.account').css('display','none')
         setSelected('arch')
+        getArchivedTasks()
     })
 
     $('#account').click(function (){
@@ -71,6 +72,26 @@ jQuery(function(){
     $('#logout').click(function(){
         logout()
         window.location.href = '../index.html'
+    })
+
+    $('.pend').on('click','.ops #edit', function(){
+        console.log($(this).parent().data('title'));
+    })
+
+    $('.pend').on('click', '#archive', function(){
+        let id = $(this).parent().data('title')
+        archiveTodo(id)
+        showToast()
+    })
+
+    $('.pend').on('click','.form-check', function(){
+        let id = $(this).data('id')
+        completTodo(id)
+    })
+
+    $('.comp').on('click','.form-check', function(){
+        let id = $(this).data('id')
+        unCompletTodo(id)
     })
 
     function setSelected(item){
@@ -152,14 +173,14 @@ jQuery(function(){
             headers: headers,
         }).then(response => {
             return response.json()
-        }).then(data => {
+        }).then((data) => {
             let pendingTasks = data.filter(x => x.status === 'Pending')
             $('.pend').children('div').remove()
             for(task of pendingTasks){
                 $('.pend').append(
                     `<div class="task">
                     <div class="_left">
-                        <div class="form-check">
+                        <div class="form-check" data-id="${task._id}">
                             <input class="form-check-input" type="checkbox" value="" id="status">
                         </div>
                         <div class="data">
@@ -180,16 +201,19 @@ jQuery(function(){
                                 ${task.dueDate}
                             </p>
                         </div>
-                        <div class="edit">
-                            <i class="bi bi-pencil"></i>
+                        <div class="ops" data-title = "${task._id}">
+                            <i id="edit" title="Edit" class="bi bi-pencil" ></i>
+                            <i id="archive" title="Archive"class="bi bi-archive"></i>
                         </div>
                     </div>
                 </div>`
                 )
             }
+            
         }).catch(err => {
             console.log(err);
         })
+        
     }
 
     function getCompletedTasks(){
@@ -201,13 +225,13 @@ jQuery(function(){
         }).then(response => {
             return response.json()
         }).then(data => {
-            let pendingTasks = data.filter(x => x.status === 'Completed')
+            let completedTasks = data.filter(x => x.status === 'Completed')
             $('.comp').children('div').remove()
-            for(task of pendingTasks){
+            for(task of completedTasks){
                 $('.comp').append(
                     `<div class="task">
                     <div class="_left">
-                        <div class="form-check">
+                        <div class="form-check" data-id="${task._id}">
                             <input class="form-check-input" type="checkbox" value="" id="status" checked>
                         </div>
                         <div class="data">
@@ -228,8 +252,47 @@ jQuery(function(){
                                 ${task.dueDate}
                             </p>
                         </div>
-                        <div class="edit">
-                            <i class="bi bi-pencil"></i>
+                    </div>
+                </div>`
+                )
+            }
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    function getArchivedTasks(){
+        fetch('http://127.0.0.1:8082/todo', {
+            method: 'get',
+            mode: 'cors',
+            credentials: 'include',
+            headers: headers,
+        }).then(response => {
+            return response.json()
+        }).then(data => {
+            let archivedTasks = data.filter(x => x.status === 'Archived')
+            $('.arch').children('div').remove()
+            for(task of archivedTasks){
+                $('.arch').append(
+                    `<div class="task">
+                    <div class="_left">
+                        <div class="data">
+                            <p class="lead">
+                                ${task.title}
+                            </p>
+                            <figcaption class="blockquote-footer">
+                                ${task.description}
+                            </figcaption>
+                        </div>
+                    </div>
+                    <div class="cont">
+                        <div class="tags">
+                            <p id="cat"class="lead">
+                                ${task.category}
+                            </p>
+                            <p id="date" class="lead">
+                                ${task.dueDate}
+                            </p>
                         </div>
                     </div>
                 </div>`
@@ -249,11 +312,46 @@ jQuery(function(){
         })
     }
 
-    function showToast(){
+    function archiveTodo(id){
+        fetch('http://127.0.0.1:8082/todo/archive/'+id, {
+            method: 'delete',
+            mode: 'cors',
+            credentials: 'include',
+        }).then((data) => {
+            getPendingTasks()
+            showToast('Task Archived')
+        })
+        
+    }
+
+    function completTodo(id){
+        fetch('http://127.0.0.1:8082/todo/complete/'+id, {
+            method: 'get',
+            mode: 'cors',
+            credentials: 'include',
+        }).then((data) => {
+            getPendingTasks()
+            showToast('Task Completed')
+        })
+    }
+
+    function unCompletTodo(id){
+        fetch('http://127.0.0.1:8082/todo/uncomplete/'+id, {
+            method: 'get',
+            mode: 'cors',
+            credentials: 'include',
+        }).then((data) => {
+            getCompletedTasks()
+            showToast('Task status changed to Pending')
+        })
+    }
+
+    function showToast(data){
         var toastElList = [].slice.call(document.querySelectorAll('.toast'))
         var toastList = toastElList.map(function(toastEl) {
             return new bootstrap.Toast(toastEl)
         })
+        document.querySelector('.toast-body').innerHTML = data
         toastList.forEach(toast => toast.show()) 
     }
 })

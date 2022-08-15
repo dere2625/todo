@@ -28,6 +28,10 @@ body{
     gap: 1em;
 }
 
+.modalcontainer{
+    height: fit-content;
+}
+
 .cont{
     display: flex;
     flex-direction: row;

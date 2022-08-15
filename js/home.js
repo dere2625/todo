@@ -1,4 +1,3 @@
-
 jQuery(function(){
     getDashInfo()
     const myModal = document.getElementById('mymodal')
@@ -76,6 +75,8 @@ jQuery(function(){
 
     $('.pend').on('click','.ops #edit', function(){
         console.log($(this).parent().data('title'));
+        $('#title').val('THis is test title')
+        $('#myModal').modal('show')
     })
 
     $('.pend').on('click', '#archive', function(){
@@ -136,6 +137,10 @@ jQuery(function(){
             $('#noDue').text(data.dueSoon)
             $('#noArch').text(data.archived)
         })
+        .catch((err) => {
+            $('#myModal').modal('hide')
+            showToast('Something went wrong','Error')
+        })
     }
 
     function createTodo(){
@@ -162,6 +167,10 @@ jQuery(function(){
             }else{
                 console.log(data)
             }
+        })
+        .catch((err) => {
+            $('#myModal').modal('hide')
+            showToast('Something went wrong','Error')
         })
     }
 
@@ -210,8 +219,8 @@ jQuery(function(){
                 )
             }
             
-        }).catch(err => {
-            console.log(err);
+        }).catch((err) => {
+            showToast('Something went wrong','Error')
         })
         
     }
@@ -256,8 +265,8 @@ jQuery(function(){
                 </div>`
                 )
             }
-        }).catch(err => {
-            console.log(err);
+        }).catch((err) => {
+            showToast('Something went wrong','Error')
         })
     }
 
@@ -298,8 +307,8 @@ jQuery(function(){
                 </div>`
                 )
             }
-        }).catch(err => {
-            console.log(err);
+        }).catch((err) => {
+            showToast('Something went wrong','Error')
         })
     }
 
@@ -310,6 +319,9 @@ jQuery(function(){
             mode: 'cors',
             credentials: 'include',
         })
+        .catch((err) => {
+            showToast('Something went wrong','Error')
+        })
     }
 
     function archiveTodo(id){
@@ -319,7 +331,10 @@ jQuery(function(){
             credentials: 'include',
         }).then((data) => {
             getPendingTasks()
-            showToast('Task Archived')
+            showToast('Task Archived','Success')
+        })
+        .catch((err) => {
+            showToast('Something went wrong','Error')
         })
         
     }
@@ -331,7 +346,10 @@ jQuery(function(){
             credentials: 'include',
         }).then((data) => {
             getPendingTasks()
-            showToast('Task Completed')
+            showToast('Task Completed','Success')
+        })
+        .catch((err) => {
+            showToast('Something went wrong','Error')
         })
     }
 
@@ -342,16 +360,20 @@ jQuery(function(){
             credentials: 'include',
         }).then((data) => {
             getCompletedTasks()
-            showToast('Task status changed to Pending')
+            showToast('Task status changed to Pending','Success')
+        })
+        .catch((err) => {
+            showToast('Something went wrong','Error')
         })
     }
 
-    function showToast(data){
+    function showToast(data,title){
         var toastElList = [].slice.call(document.querySelectorAll('.toast'))
         var toastList = toastElList.map(function(toastEl) {
             return new bootstrap.Toast(toastEl)
         })
         document.querySelector('.toast-body').innerHTML = data
+        document.querySelector('.mr-auto').innerHTML = title
         toastList.forEach(toast => toast.show()) 
     }
 })

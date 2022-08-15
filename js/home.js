@@ -1,4 +1,9 @@
 jQuery(function(){
+
+    if(!checkCookie()){
+        redirectToLogin()
+    }
+
     getDashInfo()
     const myModal = document.getElementById('mymodal')
     $('.add').click(function(){
@@ -13,7 +18,13 @@ jQuery(function(){
         $('.pend').css('display','flex')
         $('.account').css('display','none')
         setSelected('pend')
-        getPendingTasks()
+        if(!checkCookie()){
+            redirectToLogin()
+        }
+        else{
+            getPendingTasks()
+        }
+        
     })
     
 
@@ -26,7 +37,14 @@ jQuery(function(){
         $('.comp').css('display','none')
         $('.arch').css('display','none')
         $('.account').css('display','none')
+        if(!checkCookie()){
+            redirectToLogin()
+        }
+        else{
+            getPendingTasks()
+        }
         getDashInfo()
+        
         
     })
 
@@ -38,6 +56,12 @@ jQuery(function(){
         $('.arch').css('display','none')
         $('.account').css('display','none')
         setSelected('comp')
+        if(!checkCookie()){
+            redirectToLogin()
+        }
+        else{
+            getPendingTasks()
+        }
         getCompletedTasks()
         
     })
@@ -51,6 +75,12 @@ jQuery(function(){
         $('.arch').css('display','flex')
         $('.account').css('display','none')
         setSelected('arch')
+        if(!checkCookie()){
+            redirectToLogin()
+        }
+        else{
+            getPendingTasks()
+        }
         getArchivedTasks()
     })
 
@@ -61,6 +91,12 @@ jQuery(function(){
         $('.comp').css('display','none')
         $('.arch').css('display','none')
         $('.account').css('display','flex')
+        if(!checkCookie()){
+            redirectToLogin()
+        }
+        else{
+            getPendingTasks()
+        }
         setSelected('account')
     })
 
@@ -123,7 +159,9 @@ jQuery(function(){
 
 
     function getDashInfo(){
-        
+        if(!checkCookie()){
+            redirectToLogin()
+        }
         fetch('http://127.0.0.1:8082/todo/summary', {
             method: 'get',
             mode: 'cors',
@@ -375,5 +413,16 @@ jQuery(function(){
         document.querySelector('.toast-body').innerHTML = data
         document.querySelector('.mr-auto').innerHTML = title
         toastList.forEach(toast => toast.show()) 
+    }
+
+    function checkCookie(){
+        if($.cookie('token') == undefined){
+            return false
+        }
+        return true
+    }
+
+    function redirectToLogin(){
+        window.location.href = '../index.html'
     }
 })

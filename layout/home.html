@@ -17,6 +17,7 @@
     <title>Home - Todo</title>
 </head>
 <body>
+    
     <div class="leftpanel">
         <div class="icon selected"  id="dashboard" title="Dashboard">
             <i class="bi bi-speedometer2"></i>
@@ -40,6 +41,16 @@
     <div class="rightpanel">
         <div class="dash">
             <h6 class="display-6">Dashboard </h6>
+            
+                <div class="toast" style="position: absolute; top: 0; right: 0;">
+                  <div class="toast-header">
+                    <strong class="mr-auto">Success</strong>
+                  </div>
+                  <div class="toast-body">
+                    Task created
+                  </div>
+                </div>
+            
             <div class="boards">
                 <div class="board">
                     <h1 class="display-6"><span id="noPending"></span> Pending task(s) </h1>
@@ -51,9 +62,10 @@
                     <h1 class="display-6"><span id="noArch"></span> Archived Task(s) </h1>
                 </div>
                 <div class="board">
-                    <h1 class="display-6"><span id="noDue">3</span> Task(s) due soon </h1>
+                    <h1 class="display-6"><span id="noDue"></span> Task(s) due soon </h1>
                 </div>
             </div>
+
             <a id="add" class="btn-floating btn-large waves-effect waves-light red add"><i class="material-icons">add</i></a>
         </div>
         <div class="pend">
@@ -94,29 +106,39 @@
                     <label for="category" class="form-label">Category</label>
                     <select id="category" class="form-select" aria-label="Category">
                         <option selected>Select category</option>
-                        <option value="1">Sports</option>
-                        <option value="2">Personal</option>
-                        <option value="3">Work</option>
-                        <option value="4">Fun</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Personal">Personal</option>
+                        <option value="Work">Work</option>
+                        <option value="Fun">Fun</option>
+                      </select>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="stat" class="form-label">Status</label>
+                    <select disabled id="stat" class="form-select" aria-label="Status">
+                        <option selected value="Pending">Pending</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Archived">Archived</option>
+                      </select>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="priority" class="form-label">Priority</label>
+                    <select id="priority" class="form-select" aria-label="Priority">
+                        <option selected>Select Priority</option>
+                        <option value="Normal">Normal</option>
+                        <option value="High">High</option>
+                        <option value="Low">Low</option>
                       </select>
                   </div>
                   <div class="mb-3">
                     <label for="start">Due date:</label>
                     <input type="date" id="start" name="trip-start">
                   </div>
-                  <div class="mb-3">
-                    <label for="stat" class="form-label">Status</label>
-                    <select disabled id="stat" class="form-select" aria-label="Status">
-                        <option selected value="1">Pending</option>
-                        <option value="2">Completed</option>
-                        <option value="3">Archived</option>
-                      </select>
-                  </div>
 
             </div>
             <div class="modal-footer control">
-                <button type="button" class="btn btn-success" id="login">Save</button>
-                <button type="button" class="btn btn-light" id="forgotpassword">Cancel</button>
+                <button type="button" class="btn btn-success" id="create">Save</button>
             </div>
           </div>
         </div>

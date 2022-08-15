@@ -17,7 +17,6 @@ body{
     padding-top: 2em;
     padding-bottom: 2em;
     height: fit-content;
-    position: relative;
 }
 
 .rightpanel{
@@ -41,9 +40,19 @@ body{
     gap: 2em;
 }
 
-.pend{
+.pend,.comp{
     display: none;
     flex-direction: column;
+    overflow-y: scroll;
+    
+}
+
+.comp .lead, .comp .blockquote-footer{
+    text-decoration: line-through rgb(200, 200, 200);
+    
+}
+.pend::-webkit-scrollbar{
+    display: none;
 }
 
 .arch, .pend, .comp, .account{
@@ -110,6 +119,7 @@ body{
     opacity: 1;
     height: 2em;
     width: 2em;
+    position: relative;
 }
 
 .task{
@@ -151,6 +161,16 @@ body{
     font-size: small;
     height: fit-content;
     border-radius: 20px;
+}
+
+.toast{
+    display: flex;
+    flex-direction: column;
+    margin-right: 1em;
+}
+
+.mr-auto{
+    color: red;
 }
 
 

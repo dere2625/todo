@@ -4,7 +4,6 @@ jQuery(function(){
     const myModal = document.getElementById('mymodal')
     $('.add').click(function(){
         $('#myModal').modal('show')
-
     })
 
     $('#pending').click(function (){
@@ -40,6 +39,7 @@ jQuery(function(){
         $('.arch').css('display','none')
         $('.account').css('display','none')
         setSelected('comp')
+        getCompletedTasks()
         
     })
     
@@ -64,6 +64,10 @@ jQuery(function(){
         setSelected('account')
     })
 
+    $('#create').click(function(){
+        createTodo()
+    })
+
     function setSelected(item){
         switch (item) {
             case 'dash':
@@ -85,12 +89,14 @@ jQuery(function(){
                 break;
         }
     }
+    
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+
 
     function getDashInfo(){
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-
+        
         fetch('http://127.0.0.1:8082/todo/summary', {
             method: 'get',
             mode: 'cors',
@@ -106,11 +112,34 @@ jQuery(function(){
         })
     }
 
-    function getPendingTasks(){
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
+    function createTodo(){
+        fetch('http://127.0.0.1:8082/todo/create', {
+            method: 'post',
+            mode: 'cors',
+            credentials: 'include',
+            headers: headers,
+            body : JSON.stringify({
+                title : $('#title').val(),
+                description : $('#description').val(),
+                category : $('#category').val(),
+                status : 'Pending',
+                dueDate : $('#start').val(),
+                priority : $('#priority').val()
+            })
+        }).then(response => {
+            return response.json()
+        }).then(data => {
+            if(data.status === 200){
+                $('#myModal').modal('hide')
+                showToast()
+                getDashInfo()
+            }else{
+                console.log(data)
+            }
+        })
+    }
 
+    function getPendingTasks(){
         fetch('http://127.0.0.1:8082/todo', {
             method: 'get',
             mode: 'cors',
@@ -123,6 +152,54 @@ jQuery(function(){
             $('.pend').children('div').remove()
             for(task of pendingTasks){
                 $('.pend').append(
+                    `<div class="task">
+                    <div class="_left">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="status">
+                        </div>
+                        <div class="data">
+                            <p class="lead">
+                                ${task.title}
+                            </p>
+                            <figcaption class="blockquote-footer">
+                                ${task.description}
+                            </figcaption>
+                        </div>
+                    </div>
+                    <div class="cont">
+                        <div class="tags">
+                            <p id="cat"class="lead">
+                                ${task.category}
+                            </p>
+                            <p id="date" class="lead">
+                                ${task.dueDate}
+                            </p>
+                        </div>
+                        <div class="edit">
+                            <i class="bi bi-pencil"></i>
+                        </div>
+                    </div>
+                </div>`
+                )
+            }
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    function getCompletedTasks(){
+        fetch('http://127.0.0.1:8082/todo', {
+            method: 'get',
+            mode: 'cors',
+            credentials: 'include',
+            headers: headers,
+        }).then(response => {
+            return response.json()
+        }).then(data => {
+            let pendingTasks = data.filter(x => x.status === 'Completed')
+            $('.comp').children('div').remove()
+            for(task of pendingTasks){
+                $('.comp').append(
                     `<div class="task">
                     <div class="_left">
                         <div class="form-check">
@@ -156,5 +233,13 @@ jQuery(function(){
         }).catch(err => {
             console.log(err);
         })
+    }
+
+    function showToast(){
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        var toastList = toastElList.map(function(toastEl) {
+            return new bootstrap.Toast(toastEl)
+        })
+        toastList.forEach(toast => toast.show()) 
     }
 })
